@@ -46,7 +46,7 @@ public class ProdutosController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@CacheEvict(value="produtosHome")
+	@CacheEvict(value="produtosHome", allEntries=true)
 	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			 return form(produto);
