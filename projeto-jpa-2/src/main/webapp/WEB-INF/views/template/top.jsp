@@ -9,6 +9,7 @@
 	<head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<meta charset="UTF-8"></meta>
+		<title>Projeto JPA-2</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">

@@ -19,7 +19,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.caelum.model.Loja;
 import br.com.caelum.model.Produto;
 
 @Repository
@@ -28,9 +27,20 @@ public class ProdutoDao {
 	@PersistenceContext
 	private EntityManager em;
 
+//	public List<Produto> getProdutos() {
+//		return em.createQuery("select distinct p from Produto p join fetch p.categorias", Produto.class).getResultList();
+//	}
+	
+	/**
+	 * 
+	 * @getProdutos with EntityGraph
+	 */
+	
 	public List<Produto> getProdutos() {
-		return em.createQuery("from Produto", Produto.class).getResultList();
-	}
+        return em.createQuery("select distinct p from Produto p", Produto.class)
+                .setHint("javax.persistence.loadgraph", em.getEntityGraph("produtoComCategoria"))
+                .getResultList();
+}
 
 	public Produto getProduto(Integer id) {
 		Produto produto = em.find(Produto.class, id);

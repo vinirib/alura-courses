@@ -12,12 +12,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@NamedEntityGraphs({
+	@NamedEntityGraph(name = "produtoComCategoria",
+			attributeNodes = {
+					@NamedAttributeNode("categorias")
+			})
+})
 @Entity
+@DynamicUpdate /** Update only necessary attributes from this entity **/
 public class Produto {
 
 	@Id

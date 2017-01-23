@@ -17,6 +17,9 @@
 							class="block clearfix"> <img src="${produto.linkDaFoto}"
 							width="150" height="200">
 						</a>
+						<c:forEach items="${produto.categorias}" var="categoria">
+   						 <li>${categoria.nome}
+						</c:forEach>
 					<p>
 						<a class="btn btn-default"
 							href="<c:url value="/produto/${produto.id}" />" />Saiba mais </a>
