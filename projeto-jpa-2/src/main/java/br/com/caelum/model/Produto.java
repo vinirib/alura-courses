@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
+import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
@@ -45,6 +46,9 @@ public class Produto {
 	
 	@Min(20)
 	private double preco;
+	
+	@Version
+	private Integer version;
 	
 	@ManyToMany
 	@JoinTable(name="CATEGORIA_PRODUTO")
@@ -119,4 +123,11 @@ public class Produto {
 		this.categorias = categorias;
 	}
 
+	public Integer getVersion() {
+		return version;
+	}
+	
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 }
