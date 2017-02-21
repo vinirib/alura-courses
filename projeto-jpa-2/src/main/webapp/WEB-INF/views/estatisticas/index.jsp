@@ -22,13 +22,13 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>Cache</td>
-								<!-- Hit -->
-								<td></td>
-								<!-- Miss -->
-								<td></td>
-								<! -- Conections -->
-								<td></td>
+							    <td>Cache</td>
+							    <!-- Hit -->
+							    <td>${statistics.queryCacheHitCount}</td>
+							    <!-- Miss -->
+							    <td>${statistics.queryCacheMissCount}</td>
+							    <!-- Connections Count-->
+							    <td>${statistics.connectCount}</td>
 							</tr>
 						</tbody>
 					</table>
