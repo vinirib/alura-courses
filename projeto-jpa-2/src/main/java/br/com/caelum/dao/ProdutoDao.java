@@ -38,6 +38,7 @@ public class ProdutoDao {
 	
 	public List<Produto> getProdutos() {
         return em.createQuery("select distinct p from Produto p", Produto.class)
+        		.setHint("org.hibernate.cacheable", "true")/** cache this query**/
                 .setHint("javax.persistence.loadgraph", em.getEntityGraph("produtoComCategoria"))
                 .getResultList();
 }
