@@ -9,10 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@DynamicUpdate
+@DynamicInsert
 public class Produto {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,6 +25,8 @@ public class Produto {
 	private String titulo;
 	private String descricao;
 	private int paginas;
+	@Transient
+	private String imageFile;
 	
 	@ElementCollection
 	private List<Preco> precos;
@@ -83,6 +90,14 @@ public class Produto {
 
 	public void setSumarioPath(String sumarioPath) {
 		this.sumarioPath = sumarioPath;
+	}
+	
+	public String getImageFile() {
+		return imageFile;
+	}
+	
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
 	}
 
 	@Override

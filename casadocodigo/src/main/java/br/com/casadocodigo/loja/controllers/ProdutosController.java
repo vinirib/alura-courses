@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -60,7 +61,7 @@ public class ProdutosController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView listar() {
+	public ModelAndView listar() throws UnsupportedEncodingException {
 		List<Produto> listaDeProdutos = produtoDao.listar();
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
 		modelAndView.addObject("produtos", listaDeProdutos);
@@ -73,5 +74,22 @@ public class ProdutosController {
 		Produto produto = produtoDao.find(id);
 		modelAndView.addObject("produto", produto);
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="remover",method = RequestMethod.POST)
+	@CacheEvict(value="produtosHome", allEntries=true)
+	public ModelAndView remover(Integer id, RedirectAttributes redirectAttributes){
+		produtoDao.deletar(id);
+		redirectAttributes.addFlashAttribute("sucesso", "Produto removido com sucesso!");
+		return new ModelAndView("redirect:/produtos");
+	}
+	
+	@RequestMapping(value="editar",method = RequestMethod.POST)
+	@CacheEvict(value="produtosHome", allEntries=true)
+	public ModelAndView editar(Integer id){
+		Produto produto = produtoDao.find(id);
+		ModelAndView view = new ModelAndView("produtos/form");
+		view.addObject("produto", produto);
+		return view;
 	}
 }

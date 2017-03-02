@@ -62,7 +62,7 @@
 					</div>
 			</c:forEach>
 			<div class="form-group">
-				<label>Sumário</label>
+				<label>Imagem sumário</label>
 				<input type="file" name="sumario"  class="form-control">
 			</div>
 			<button type="submit">Cadastrar</button>
