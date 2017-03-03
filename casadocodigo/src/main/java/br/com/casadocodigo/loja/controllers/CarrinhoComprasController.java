@@ -9,6 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.infra.FileLoader;
 import br.com.casadocodigo.loja.models.CarrinhoCompras;
 import br.com.casadocodigo.loja.models.CarrinhoItem;
 import br.com.casadocodigo.loja.models.Produto;
@@ -25,9 +26,12 @@ public class CarrinhoComprasController {
 	@Autowired
 	private CarrinhoCompras carrinhoCompras;
 	
+	@Autowired
+	private FileLoader fileLoader;
+	
 	@RequestMapping("/add")
 	public ModelAndView add(Integer produtoId, TipoPreco tipo){
-	    ModelAndView modelAndView = new ModelAndView("redirect:/produtos");
+	    ModelAndView modelAndView = new ModelAndView("redirect:/");
 	    CarrinhoItem carrinhoItem = criaItem(produtoId, tipo);
 	    carrinhoCompras.add(carrinhoItem);
 	    return modelAndView;
@@ -35,6 +39,8 @@ public class CarrinhoComprasController {
 
 	private CarrinhoItem criaItem(Integer produtoId, TipoPreco tipoPreco) {
 		Produto produto = produtoDao.find(produtoId);
+		String imageFile = fileLoader.load(produto.getSumarioPath());
+		produto.setImageFile(imageFile);
 		return new CarrinhoItem(produto, tipoPreco);
 	}
 	
