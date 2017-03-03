@@ -17,4 +17,9 @@ public class LoginController {
     public ModelAndView logout(){
     	return new ModelAndView("redirect:/");
     }
+    
+//    @RequestMapping(method=RequestMethod.GET)
+//    public String criar(){
+//    	return "formLogin";
+//    }
 }

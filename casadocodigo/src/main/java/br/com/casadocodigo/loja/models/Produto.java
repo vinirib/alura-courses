@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,11 @@ public class Produto {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@Column(nullable=false)
 	private String titulo;
+	@Column(nullable=false)
 	private String descricao;
+	@Column(nullable=false)
 	private int paginas;
 	@Transient
 	private String imageFile;

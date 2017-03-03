@@ -5,7 +5,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<%@include file="/WEB-INF/views/head.jsp" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
+
+<tags:pageTemplate titulo="${produto.titulo}">
 
 	<nav class="categories-nav">
 		<ul class="container">
@@ -81,4 +83,5 @@
 	</div>
 	
 	</article>	
-<%@include file="/WEB-INF/views/footer.jsp" %>
+
+</tags:pageTemplate>

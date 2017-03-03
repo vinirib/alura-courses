@@ -54,6 +54,8 @@
 				<form:input path="paginas" />
 				<form:errors path="paginas"/>
 			</div>
+			<form:errors path="precos"/>
+			<h3>Preços</h3>
 			<c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
 				<div class="form-group">
 					<label>${tipoPreco}</label>

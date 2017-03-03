@@ -57,7 +57,7 @@ public class ProdutosController {
 		produto.setSumarioPath(filePath);
 		produtoDao.gravar(produto);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-		return new ModelAndView("redirect:produtos");
+		return new ModelAndView("redirect:/listar");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -89,6 +89,7 @@ public class ProdutosController {
 	public ModelAndView editar(Integer id){
 		Produto produto = produtoDao.find(id);
 		ModelAndView view = new ModelAndView("produtos/form");
+		view.addObject("tipos", TipoPreco.values());
 		view.addObject("produto", produto);
 		return view;
 	}
