@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
-
 		<header id="layout-header">
 			<div class="clearfix container">
 				<a href="/casadocodigo" id="logo"> </a>

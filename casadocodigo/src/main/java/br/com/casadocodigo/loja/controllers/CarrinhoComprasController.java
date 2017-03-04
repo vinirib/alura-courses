@@ -29,6 +29,7 @@ public class CarrinhoComprasController {
 	@Autowired
 	private FileLoader fileLoader;
 	
+	
 	@RequestMapping("/add")
 	public ModelAndView add(Integer produtoId, TipoPreco tipo){
 	    ModelAndView modelAndView = new ModelAndView("redirect:/");
