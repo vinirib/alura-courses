@@ -11,17 +11,32 @@
 	<article id="livro-css-eficiente">
 		  <header id="product-highlight" class="clearfix">
 		    <div id="product-overview" class="container">
-		      <img width="280px" height="395px" src="data:image/jpg;base64, ${produto.imageFile}" class="product-featured-image" />
-		      <h1 class="product-title">${produto.titulo}</h1>
-		      <p class="product-author">
-		        <span class="product-author-link">
-		          
-		        </span>
-		      </p>	
-			
-		    <p class="book-description">
-		    	${produto.descricao}
-		    </p>
+			    <c:if test="${produto.imageFile == '' }">
+						<c:if test="${produto.sumarioPath == null }">
+							<img width="280px"
+								height="395px"
+								src="https://cdn.shopify.com/s/files/1/0155/7645/products/java8-featured_large.png?v=1411490181"
+								alt="${produto.titulo}"
+								title="${produto.titulo}" class="product-featured-image" />
+						</c:if>
+					<img width="280px"
+						height="395px"
+						src="${produto.sumarioPath}"
+						alt="${produto.titulo}"
+						title="${produto.titulo}" class="product-featured-image" />
+				</c:if>
+				<c:if test="${produto.imageFile != '' }">
+			      <img width="280px" height="395px" src="data:image/jpg;base64, ${produto.imageFile}" class="product-featured-image" />
+			     </c:if>
+			      <h1 class="product-title">${produto.titulo}</h1>
+			      <p class="product-author">
+			        <span class="product-author-link">
+			        </span>
+			      </p>	
+				
+			    <p class="book-description">
+			    	${produto.descricao}
+			    </p>
 		    </div>
 		  </header>
 	

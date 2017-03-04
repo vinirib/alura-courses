@@ -28,14 +28,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
 
-import br.com.casadocodigo.loja.controllers.HomeController;
-import br.com.casadocodigo.loja.daos.ProdutoDAO;
-import br.com.casadocodigo.loja.infra.FileSaver;
-import br.com.casadocodigo.loja.models.CarrinhoCompras;
-
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class,
-		FileSaver.class, CarrinhoCompras.class})
+@ComponentScan("br.com.casadocodigo.loja")
 @EnableCaching
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	

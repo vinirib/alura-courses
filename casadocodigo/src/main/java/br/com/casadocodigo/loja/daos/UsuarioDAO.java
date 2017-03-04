@@ -30,4 +30,5 @@ public class UsuarioDAO implements UserDetailsService {
 
 		return usuarios.get(0);
 	}
+
 }

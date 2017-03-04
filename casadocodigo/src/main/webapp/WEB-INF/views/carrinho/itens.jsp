@@ -40,7 +40,15 @@
 				      <c:forEach items="${carrinhoCompras.itens }" var="item">
 					    <tr>
 					        <td class="cart-img-col" style="padding-left:20px">
-					            <img src="data:image/jpg;base64,${item.produto.imageFile}" width="71px" height="100px" />
+        			   			<c:if test="${item.produto.imageFile == '' }">
+									<c:if test="${item.produto.sumarioPath == null }">
+										<img src="https://cdn.shopify.com/s/files/1/0155/7645/products/java8-featured_large.png?v=1411490181" width="71px" height="100px" />
+									</c:if>
+									<img src="${item.produto.sumarioPath}" width="71px" height="100px" />
+								</c:if>
+								<c:if test="${item.produto.imageFile != '' }">
+						            <img src="data:image/jpg;base64,${item.produto.imageFile}" width="71px" height="100px" />
+								</c:if>
 					        </td>
 					        <td class="item-title">${item.produto.titulo}</td>
 					        <td class="numeric-cell">${item.preco}</td>

@@ -39,6 +39,14 @@ public class ProdutosController {
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new ProdutoValidation());
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView listar() throws UnsupportedEncodingException {
+		List<Produto> listaDeProdutos = produtoDao.listar();
+		ModelAndView modelAndView = new ModelAndView("produtos/lista");
+		modelAndView.addObject("produtos", listaDeProdutos);
+		return modelAndView;
+	}
 
 	@RequestMapping("/form")
 	public ModelAndView form(Produto produto) {
@@ -62,14 +70,6 @@ public class ProdutosController {
 		return new ModelAndView("redirect:/produtos");
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView listar() throws UnsupportedEncodingException {
-		List<Produto> listaDeProdutos = produtoDao.listar();
-		ModelAndView modelAndView = new ModelAndView("produtos/lista");
-		modelAndView.addObject("produtos", listaDeProdutos);
-		return modelAndView;
-	}
-	
 	@RequestMapping("detalhe/{id}")
 	public ModelAndView detalhe(@PathVariable("id")Integer id){
 		ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
