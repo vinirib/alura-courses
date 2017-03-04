@@ -38,8 +38,11 @@ public class ProdutoDAO {
 
 
 	public Produto find(Integer id) {
-		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class)
+		Produto produto = manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class)
 				.setParameter("id", id).getSingleResult();	
+		String image = fileLoader.load(produto.getSumarioPath());
+		produto.setImageFile(image);
+		return produto;
 	}
 	
 	public void deletar(Integer id){

@@ -11,7 +11,7 @@
 	<article id="livro-css-eficiente">
 		  <header id="product-highlight" class="clearfix">
 		    <div id="product-overview" class="container">
-		      <img width="280px" height="395px" src="http://cdn.shopify.com/s/files/1/0155/7645/products/css-eficiente-featured_large.png?v=1435245145" class="product-featured-image" />
+		      <img width="280px" height="395px" src="data:image/jpg;base64, ${produto.imageFile}" class="product-featured-image" />
 		      <h1 class="product-title">${produto.titulo}</h1>
 		      <p class="product-author">
 		        <span class="product-author-link">

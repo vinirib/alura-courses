@@ -20,8 +20,6 @@
 							</security:authorize>
 							<li><a href="${s:mvcUrl('CCC#itens').build()}" rel="nofollow">Carrinho
 									( ${carrinhoCompras.quantidade} )</a></li>
-							<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre
-									Nós</a></li>
 						</ul>
 					</nav>
 				</div>
