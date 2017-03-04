@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.casadocodigo.loja.infra.FileLoader;
+import br.com.casadocodigo.loja.models.Categoria;
 import br.com.casadocodigo.loja.models.Produto;
 
 @Repository
@@ -23,21 +24,22 @@ public class ProdutoDAO {
 	private FileLoader fileLoader;
 	
 	public void gravar(Produto produto){
-		manager.persist(produto);
+		if (produto.getId() == 0)
+			manager.persist(produto);
+		else
+			manager.merge(produto);
 	}
 	
 	public List<Produto> listar(){
 		List<Produto> produtos = manager.createQuery("select q from Produto q", Produto.class).getResultList();
-		for (Produto produto2 : produtos) {
-			String image = fileLoader.load(produto2.getSumarioPath());
-			produto2.setImageFile(image);
-		}
+		setBase64Images(produtos);
 		return produtos;
 	}
 
+
 	public Produto find(Integer id) {
 		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class)
-				.setParameter("id", id).getSingleResult();
+				.setParameter("id", id).getSingleResult();	
 	}
 	
 	public void deletar(Integer id){
@@ -47,5 +49,19 @@ public class ProdutoDAO {
 	
 	public void atualizar(Produto produtoUpdated){
 		manager.merge(produtoUpdated);
+	}
+
+	public List<Produto> listarPorCategoria(String categoria) {
+		List<Produto> produtos = manager.createQuery("select p from Produto p join fetch p.categorias categorias where categorias = :categoria", Produto.class)
+				.setParameter("categoria", Categoria.valueOf(categoria)).getResultList();
+		setBase64Images(produtos);
+		return produtos;
+	}
+
+	private void setBase64Images(List<Produto> produtos) {
+		for (Produto produto2 : produtos) {
+			String image = fileLoader.load(produto2.getSumarioPath());
+			produto2.setImageFile(image);
+		}
 	}
 }

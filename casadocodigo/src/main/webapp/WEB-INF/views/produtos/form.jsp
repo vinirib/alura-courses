@@ -10,9 +10,16 @@
 <title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais -
 	Casa do Código</title>
 	<jsp:include page="../components/libs.jsp"/>
+	<style type="text/css">
+	.categorias {
+		font-size: 12px !important; 
+		text-transform: capitalize !important;
+	}
+	
+	</style>
 </head>
 <body>
-		<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 	  <div class="container">
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -33,7 +40,8 @@
 	</nav>
 	<div class="container">
 		<h1>Cadastro de Produto</h1>
-		<form:form action="${s:mvcUrl('PC#gravar').build()}" method="post" commandName="produto" enctype="multipart/form-data">
+		<form:form  action="${s:mvcUrl('PC#gravar').build()}" method="post" commandName="produto" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="${produto.id}"/>
 			<div class="form-group">
 				<label>Título</label> 
 				<form:input path="titulo" cssClass="form-control"/>
@@ -64,10 +72,16 @@
 					</div>
 			</c:forEach>
 			<div class="form-group">
-				<label>Imagem sumário</label>
-				<input type="file" name="sumario"  class="form-control">
+				<label>Categoria</label><br>
+				<form:checkboxes items="${categorias}" path="categorias" cssClass="form-control categorias"/>
+<!-- 				AGILE <input type="checkbox" name="usuario.categorias[0]" value="AGILE"/> -->
+<!-- 				FRONT END <input type="checkbox" name="usuario.categorias[1]" value="FRONT_END"/> -->
 			</div>
-			<button type="submit">Cadastrar</button>
+			<div class="form-group">
+				<label>Imagem sumário</label>
+				<input type="file" name="sumario"  class="form-control" value="${produto.sumarioPath}">
+			</div>
+			<button type="submit">Salvar</button>
 		</form:form>
 	</div>
 </body>

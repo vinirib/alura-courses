@@ -7,50 +7,31 @@
 
 <tags:pageTemplate titulo="Livros de Java, SOA, Android, iPhone, Ruby on Rails e muito mais">
 <jsp:body>
-	<nav class="categories-nav">
-		<ul class="container">
-			<li class="category"><a href="http://www.casadocodigo.com.br">Home</a></li>
-			<li class="category"><a href="/collections/livros-de-agile">
-					Agile </a></li>
-			<li class="category"><a href="/collections/livros-de-front-end">
-					Front End </a></li>
-			<li class="category"><a href="/collections/livros-de-games">
-					Games </a></li>
-			<li class="category"><a href="/collections/livros-de-java">
-					Java </a></li>
-			<li class="category"><a href="/collections/livros-de-mobile">
-					Mobile </a></li>
-			<li class="category"><a
-				href="/collections/livros-desenvolvimento-web"> Web </a></li>
-			<li class="category"><a href="/collections/outros"> Outros </a></li>
-		</ul>
-	</nav>
-
-			
 	<section id="index-section" class="container middle">
-
 		<h1 class="cdc-call">Últimos dias com os preços promocionais. Aproveite!</h1>
 		<ul class="clearfix book-collection">
-
-			<c:forEach items="${produtos}" var="produto">
-				<li><a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}" class="block clearfix">
-					<h2 class="product-title">${produto.titulo}</h2>
-					<c:if test="${produto.imageFile == '' }">
-						<img width="143"
-							height="202"
-							src="https://cdn.shopify.com/s/files/1/0155/7645/products/java8-featured_large.png?v=1411490181"
-							alt="${produto.titulo}"
-							title="${produto.titulo}"/>
-					</c:if>
-						<img width="143"
-							height="202"
-							src="data:image/jpg;base64,${produto.imageFile}"
-							alt="${produto.titulo}"
-							title="${produto.titulo}"/>
-						<small class="buy-button">Compre</small>
-				</a></li>
-			</c:forEach>
-			
+		<c:forEach items="${produtos}" var="produto">
+			<li><a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}" class="block clearfix">
+				<h2 class="product-title">${produto.titulo}</h2>
+				<c:if test="${produto.imageFile == '' }">
+					<img width="143"
+						height="202"
+						src="https://cdn.shopify.com/s/files/1/0155/7645/products/java8-featured_large.png?v=1411490181"
+						alt="${produto.titulo}"
+						title="${produto.titulo}"/>
+				</c:if>
+					<img width="143"
+						height="202"
+						src="data:image/jpg;base64,${produto.imageFile}"
+						alt="${produto.titulo}"
+						title="${produto.titulo}"/>
+					<small class="buy-button">Compre</small>
+			</a></li>
+		</c:forEach>
+		<c:if test="${produtos.isEmpty()}">
+			<center><h3 class="product-title">Não há produtos cadastrados</h3></center>
+		</c:if>
+						
 		</ul>
 
 		<h2 class="cdc-call">Diferenciais da Casa do Código</h2>

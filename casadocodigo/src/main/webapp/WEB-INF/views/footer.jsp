@@ -4,43 +4,43 @@
 			<!-- cdc-footer -->
 			<p class="footer-title">Coleções de Programação</p>
 			<ul class="footer-text-links">
-				<li><a href="/collections/livros-de-java">Java</a></li>
-				<li><a href="/collections/livros-desenvolvimento-web">Desenvolvimento
+				<li><a href="#">Java</a></li>
+				<li><a href="#">Desenvolvimento
 						Web</a></li>
-				<li><a href="/collections/livros-de-mobile">Mobile</a></li>
-				<li><a href="/collections/games">Games</a></li>
-				<li><a href="/collections/livros-de-front-end">Front End</a></li>
+				<li><a href="#">Mobile</a></li>
+				<li><a href="#">Games</a></li>
+				<li><a href="#">Front End</a></li>
 			</ul>
 			<p class="footer-title">Outros Assuntos</p>
 			<ul class="footer-text-links">
-				<li><a href="/collections/livros-de-agile">Agile</a></li>
-				<li><a href="/collections/outros">e outros...</a></li>
+				<li><a href="#">Agile</a></li>
+				<li><a href="#">e outros...</a></li>
 			</ul>
 		</div>
 		<div id="social-footer">
 			<!-- books-footer -->
 			<p class="footer-title">Links da Casa do Código</p>
 			<ul class="footer-text-links">
-				<li><a href="http://livros.casadocodigo.com.br" rel="nofollow">Meus
+				<li><a href="#">Meus
 						E-books</a></li>
-				<li><a href="/pages/sobre-a-casa-do-codigo">Sobre a Casa do
+				<li><a href="#">Sobre a Casa do
 						Código</a></li>
-				<li><a href="/pages/perguntas-frequentes">Perguntas
+				<li><a href="#">Perguntas
 						Frequentes</a></li>
-				<li><a href="https://www.caelum.com.br">Caelum - Ensino e
+				<li><a href="#">Caelum - Ensino e
 						Inovação</a></li>
-				<li><a href="http://www.codecrushing.com/" rel="nofollow">Code
+				<li><a href="#">Code
 						Crushing</a></li>
 				<li><a
-					href="http://www.casadocodigo.com.br/pages/politica-de-privacidade"
+					href="#"
 					rel="nofollow">Política de Privacidade</a></li>
 			</ul>
 			<p class="footer-title">Redes Sociais</p>
 			<ul>
 				<li class="social-links"><a
-					href="http://www.twitter.com/casadocodigo" target="_blank"
+					href="#"
 					id="twitter" rel="nofollow">Facebook</a> <a
-					href="http://www.facebook.com/casadocodigo" target="_blank"
+					href="#"
 					id="facebook" rel="nofollow">Twitter</a></li>
 			</ul>
 		</div>
@@ -48,7 +48,6 @@
 			<!-- social-footer -->
 			<p class="footer-title">Receba as Novidades e Lançamentos</p>
 			<div id="form-newsletter">
-				<form action="" method="POST" id="ss-form" class="form-newsletter">
 					<ul>
 						<li><input type="hidden" name="pageNumber" value="0" /><input
 							type="hidden" name="backupCache" value="" /><input type="email"
@@ -57,9 +56,8 @@
 						<li><input type="submit" name="submit" value="Quero Receber!"
 							id="submit-newsletter" /></li>
 					</ul>
-				</form>
 				<ul>
-					<li class="ie8"><a href="" rel="nofollow">Receba as
+					<li class="ie8"><a href="#">Receba as
 							Novidades e Lançamentos</a></li>
 				</ul>
 			</div>

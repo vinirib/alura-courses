@@ -63,19 +63,24 @@
 	<form:form servletRelativeAction="/login" method="post" cssClass="form-signin">
 		<h2 class="form-signin-heading">Casa do Código</h2>
 		<label for="inputEmail" class="sr-only">Email address</label>
-		 <input	id="inputEmail" class="form-control" placeholder="Email address"
-			required="" autofocus="" type="email" name="username"> 
-		<label
-			for="inputPassword" class="sr-only">Password</label> <input
-			id="inputPassword" class="form-control" placeholder="Password"
-			required="" type="password" name="">
+		 	<input	id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email" name="username"> 
+		<label for="inputPassword" class="sr-only">Password</label> 
+			<input id="inputPassword" class="form-control" placeholder="Password" required="" type="password" name="password">
+		<c:if test="${param.error != null}">
+		    <div id="error">
+		    	<font color="red">
+			        <s:message code="message.badCredentials">   
+			        </s:message>
+		        </font>
+		    </div>
+		</c:if>
 		<div class="checkbox">
 			<label> <input value="remember-me" type="checkbox">
 				Remember me
 			</label>
-<!-- 				<label for="criarConta"> -->
-<%-- 					<a href="${s:mvcUrl('LC#criar').build()}">Criar Conta</a> --%>
-<!-- 				</label> -->
+				<label for="criarConta">
+					<a href="${s:mvcUrl('LC#criar').build()}">Criar Conta</a>
+				</label>
 		</div>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 			in</button>

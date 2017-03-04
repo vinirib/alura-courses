@@ -4,12 +4,17 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -38,7 +43,12 @@ public class Produto {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataLancamento;
 	private String sumarioPath;
-	
+
+	@ElementCollection(targetClass=Categoria.class, fetch=FetchType.EAGER)
+	@CollectionTable(name="produto_categoria", joinColumns = @JoinColumn(name = "categoria_id"))
+	@Column(name="categoria", nullable=false)
+	@Enumerated(EnumType.STRING)
+	private List<Categoria> categorias;
 	
 	public void setId(int id) {
 		this.id = id;
@@ -104,6 +114,14 @@ public class Produto {
 		this.imageFile = imageFile;
 	}
 
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+	
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+	
 	@Override
 	public String toString() {
 		return "Produto [titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas + "]";

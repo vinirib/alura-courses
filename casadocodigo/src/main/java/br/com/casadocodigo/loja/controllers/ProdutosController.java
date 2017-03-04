@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
 import br.com.casadocodigo.loja.infra.FileSaver;
+import br.com.casadocodigo.loja.models.Categoria;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
 import br.com.casadocodigo.loja.validation.ProdutoValidation;
@@ -43,6 +44,8 @@ public class ProdutosController {
 	public ModelAndView form(Produto produto) {
 		ModelAndView modelAndView = new ModelAndView("produtos/form");
 		modelAndView.addObject("tipos", TipoPreco.values());
+		modelAndView.addObject("categorias", Categoria.values());
+
 		return modelAndView;
 	}
 
@@ -52,12 +55,11 @@ public class ProdutosController {
 		if (result.hasErrors()) {
 			 return form(produto);
 		}
-		System.out.println(sumario.getOriginalFilename());
 		String filePath = fileSaver.gravar("casadocodigo-imgs", sumario);
 		produto.setSumarioPath(filePath);
 		produtoDao.gravar(produto);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-		return new ModelAndView("redirect:/listar");
+		return new ModelAndView("redirect:/produtos");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -90,6 +92,7 @@ public class ProdutosController {
 		Produto produto = produtoDao.find(id);
 		ModelAndView view = new ModelAndView("produtos/form");
 		view.addObject("tipos", TipoPreco.values());
+		view.addObject("categorias", Categoria.values());
 		view.addObject("produto", produto);
 		return view;
 	}

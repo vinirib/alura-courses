@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
@@ -21,6 +23,13 @@ public class HomeController {
 	@Cacheable(value="produtosHome")
 	public ModelAndView index(){
 		List<Produto> produtos = produtoDao.listar();
+		ModelAndView model = new ModelAndView("home");
+		model.addObject("produtos", produtos);
+		return model;
+	}
+	@RequestMapping(value="/collection/{categoria}", method=RequestMethod.GET)
+	public ModelAndView collection(@PathVariable String categoria){
+		List<Produto> produtos = produtoDao.listarPorCategoria(categoria);
 		ModelAndView model = new ModelAndView("home");
 		model.addObject("produtos", produtos);
 		return model;

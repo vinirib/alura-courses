@@ -27,3 +27,21 @@
 				</div>
 			</div>
 		</header>
+		<nav class="categories-nav">
+			<ul class="container">
+				<li class="category"><a href="/casadocodigo">Home</a></li>
+				<li class="category"><a href="${s:mvcUrl('HC#collection').arg(0, 'AGILE').build()}">
+						Agile </a></li>
+				<li class="category"><a href="${s:mvcUrl('HC#collection').arg(0, 'FRONT_END').build()}">
+						Front End </a></li>
+				<li class="category"><a href="${s:mvcUrl('HC#collection').arg(0, 'GAMES').build()}">
+						Games </a></li>
+				<li class="category"><a href="${s:mvcUrl('HC#collection').arg(0, 'JAVA').build()}">
+						Java </a></li>
+				<li class="category"><a href="${s:mvcUrl('HC#collection').arg(0, 'MOBILE').build()}">
+						Mobile </a></li>
+				<li class="category"><a
+					href="${s:mvcUrl('HC#collection').arg(0, 'WEB').build()}"> Web </a></li>
+				<li class="category"><a href="${s:mvcUrl('HC#collection').arg(0, 'OUTROS').build()}"> Outros </a></li>
+			</ul>
+		</nav>
