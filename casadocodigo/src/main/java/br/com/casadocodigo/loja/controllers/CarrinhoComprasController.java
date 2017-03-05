@@ -1,5 +1,8 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -47,7 +50,11 @@ public class CarrinhoComprasController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView itens(){
-		return new ModelAndView("carrinho/itens");
+		List<Produto> produtos = produtoDao.listarLimitada(5);
+		ModelAndView view = new ModelAndView("carrinho/itens");
+		Collections.shuffle(produtos);
+		view.addObject("produtos", produtos);
+		return view;
 	}
 	
 	@RequestMapping("/remover")

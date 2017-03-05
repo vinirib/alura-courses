@@ -81,11 +81,25 @@
 			  
 			  <h2>Você já conhece os outros livros da Casa do Código?</h2>
 			  <ul id="collection" class="related-books">          
-			      <li class="col-left">
-			        <a href="/products/livro-plsql" class="block clearfix book-suggest" data-book="PL/SQL: Domine a linguagem do banco de dados Oracle">
-			          <img width="113px" height="160px" src="http:////cdn.shopify.com/s/files/1/0155/7645/products/plsql-featured_compact.png?v=1434740236" alt="PL/SQL: Domine a linguagem do banco de dados Oracle"/>
-			        </a>
-			      </li>          
+					<c:forEach items="${produtos}" var="produto">
+					      <li class="col-left">
+					      <c:if test="${produto.imageFile == '' }">
+								<c:if test="${produto.sumarioPath == null }">
+							        <a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}" class="block clearfix book-suggest" data-book="${produto.titulo}">
+							          <img width="113px" height="160px" src="http:////cdn.shopify.com/s/files/1/0155/7645/products/plsql-featured_compact.png?v=1434740236" alt="${produto.titulo}"/>
+							        </a>
+								</c:if>
+									<a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}" class="block clearfix book-suggest" data-book="${produto.titulo}">
+							          <img width="113px" height="160px" src="${produto.sumarioPath}" alt="${produto.titulo}"/>
+							        </a>
+						   </c:if>
+						   <c:if test="${produto.imageFile != '' }">
+						        <a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}" class="block clearfix book-suggest" data-book="${produto.titulo}">
+						          <img width="113px" height="160px" src="data:image/jpg;base64,${produto.imageFile}" alt="${produto.titulo}"/>
+						        </a>
+					        </c:if>
+					      </li>          
+			      	</c:forEach>
 			  </ul>
 			  
 			  <h2><a href="${s:mvcUrl('PC#listar').build() }">Retornar para lista de produtos</a></h2>

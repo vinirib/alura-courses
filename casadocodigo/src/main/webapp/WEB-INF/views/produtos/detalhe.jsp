@@ -72,7 +72,7 @@
 		<div class="container">
 		  <section class="summary">
 		    <ul>
-		      	<li><h3>E muito mais... <a href='/pages/sumario-java8'>veja o sumário</a>.</h3></li>
+		      	<li><h3>E muito mais... <a href='#'>veja o sumário</a>.</h3></li>
 		    </ul>
 		  </section>
 		  
@@ -81,7 +81,7 @@
 		    <p>Número de páginas: <span>${produto.paginas}</span></p>
 		    <p></p>
 		    <p>Data de publicação: <fmt:formatDate pattern="dd/MM/yyyy" value="${produto.dataLancamento.time}"/></p>
-		    <p>Encontrou um erro? <a href='/submissao-errata' target='_blank'>Submeta uma errata</a></p>
+		    <p>Encontrou um erro? <a href='#' target='_blank'>Submeta uma errata</a></p>
 		  </section>
 		</div>
 		

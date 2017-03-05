@@ -36,6 +36,12 @@ public class ProdutoDAO {
 		return produtos;
 	}
 
+	public List<Produto> listarLimitada(int quantidade){
+		List<Produto> produtos = manager.createQuery("select q from Produto q order by rand()", Produto.class).setMaxResults(quantidade).getResultList();
+		setBase64Images(produtos);
+		return produtos;
+	}
+
 
 	public Produto find(Integer id) {
 		Produto produto = manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class)

@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
@@ -65,7 +64,6 @@ public class CriadorDeProdutos {
 			}
 
 			private void verifyUsers() {
-				UserDetails usuario = null;
 				try {
 					usuarioDAO.loadUserByUsername("admin@casadocodigo.com.br");
 				} catch (Exception e) {
@@ -83,7 +81,6 @@ public class CriadorDeProdutos {
 					adminUser.setRoles(Arrays.asList(role));
 					em.persist(adminUser);
 				}
-				
 			}
 
 			private void verifyRoles() {
@@ -183,6 +180,89 @@ public class CriadorDeProdutos {
 				spring.setCategorias(Arrays.asList(Categoria.JAVA));
 				
 				em.persist(spring);
+
+				Produto linux = new Produto();
+				linux.setTitulo("Começando com o Linux");
+				linux.setDescricao(" Conhecer e utilizar Linux é essencial. Não apenas para um administrador de sistemas, mas também para "
+						+ "o desenvolvedor web, para o administrador de banco de dados ou o usuário mais engajado de qualquer sistema vindo"
+						+ " do Unix, como o Mac OSX.Neste livro, Daniel Romero parte desde a instalação do Ubuntu, utilização de comandos"
+						+ " básicos, conhecimento do sistema de diretórios para depois atacar processos, configuração de pacotes como "
+						+ "Apache, PHP, Java e MySQL, para depois chegar na criação de seus próprios scripts.Em um linguajar fácil e passo "
+						+ "a passo, você vai perder o medo de encarar a linha de comando e os terminais, para tirar o máximo de proveito"
+						+ " desse onipresente sistema operacional. ");
+				
+				linux.setSumarioPath("//cdn.shopify.com/s/files/1/0155/7645/products/linux-featured_large.png?v=1411487268");
+				setPrecosOnProdutos(linux);
+				linux.setDataLancamento(Calendar.getInstance());
+				linux.setPaginas(150);
+				linux.setCategorias(Arrays.asList(Categoria.OUTROS));
+				
+				em.persist(linux);
+				
+				Produto agile = new Produto();
+				agile.setTitulo("Agile");
+				agile.setDescricao(" As diversas metodologias ágeis que formam o tão falado \"Agile\" são hoje uma das maneiras mais "
+						+ "eficientes de guiar um projeto do ínicio ao fim, sem complicações e mantendo o tempo inteiro o foco na "
+						+ "entrega de valor para o cliente.Neste livro, André Faria Gomes, renomado coach e líder de equipes, explica "
+						+ "como os diferentes sabores de Agile podem fazer um projeto de sucesso. Aprenda como o Kanban, XP e Scrum podem "
+						+ "ser usados em conjunto e onde cada um dos métodos se complementa, além de conhecer dicas para adotar as "
+						+ "metodologias no seu dia a dia de trabalho. ");
+				
+				agile.setSumarioPath("//cdn.shopify.com/s/files/1/0155/7645/products/agile-featured_large.png?v=1411485880");
+				setPrecosOnProdutos(agile);
+				agile.setDataLancamento(Calendar.getInstance());
+				agile.setPaginas(150);
+				agile.setCategorias(Arrays.asList(Categoria.AGILE));
+				
+				em.persist(agile);
+				
+				Produto node = new Produto();
+				node.setTitulo("Node.js");
+				node.setDescricao("Node.js é uma poderosa plataforma. Ele permite escrever aplicações JavaScript no server-side, "
+						+ "tirando proveito da sintaxe e familiaridade da linguagem para escrever aplicações web escaláveis."
+						+ "Como o Node.js usa um modelo orientado a eventos, focado em I/O não bloqueante, desenvolver nele pode "
+						+ "ser diferente para quem está acostumado às aplicações web tradicionais. Neste livro, Caio Ribeiro Pereira "
+						+ "quebra essa enorme barreira, mostrando claramente essa mudança de paradigma, além de focar em tópicos "
+						+ "importantes, as APIs principais e frameworks como o Express e o Socket.IO.");
+				
+				node.setSumarioPath("//cdn.shopify.com/s/files/1/0155/7645/products/nodejs-featured_large.png?v=1411486494");
+				setPrecosOnProdutos(node);
+				node.setDataLancamento(Calendar.getInstance());
+				node.setPaginas(161);
+				node.setCategorias(Arrays.asList(Categoria.FRONT_END,Categoria.WEB,Categoria.OUTROS));
+				
+				em.persist(node);
+				
+				Produto androidJogos = new Produto();
+				androidJogos.setTitulo("Desenvolvimento de Jogos para Android");
+				androidJogos.setDescricao(" Crie histórias e jogos da forma que sempre imaginou! Se você já conhece um pouco de "
+						+ "desenvolvimento Android, vai se surpreender com este livro. De forma didática e prática, conceitos são"
+						+ " apresentados sempre com aplicações diretas no jogo que é desenvolvido.Construa um jogo do início ao fim, "
+						+ "sem esquecer a importância do enredo, distribuição, arte e como prender a atenção do jogador. Lógica,"
+						+ " matemática e física são apresentados sem traumas. Também conheceremos muitos dos benefícios do framework "
+						+ "Cocos2D, utilizado na versão definitiva do nosso game. ");
+				
+				androidJogos.setSumarioPath("//cdn.shopify.com/s/files/1/0155/7645/products/jogos-android-featured_large.png?v=1411488637");
+				setPrecosOnProdutos(androidJogos);
+				androidJogos.setDataLancamento(Calendar.getInstance());
+				androidJogos.setPaginas(189);
+				androidJogos.setCategorias(Arrays.asList(Categoria.GAMES,Categoria.OUTROS));
+				
+				em.persist(androidJogos);
+				
+				Produto startup = new Produto();
+				startup.setTitulo("Guia da Startup");
+				startup.setDescricao("Aprenda as melhores técnicas para criar o seu produto web e faça ele render dinheiro o mais "
+						+ "rápido possível com o Guia da Startup. Da mesma maneira que diversas empresas de sucesso fizeram, como a "
+						+ "Caelum e a Locaweb, invista em suas ideias.");
+				
+				startup.setSumarioPath("//cdn.shopify.com/s/files/1/0155/7645/products/cover_f0c223aa-023e-415b-8389-a942213aae39_large.jpg?v=1486151929");
+				setPrecosOnProdutos(startup);
+				startup.setDataLancamento(Calendar.getInstance());
+				startup.setPaginas(388);
+				startup.setCategorias(Arrays.asList(Categoria.AGILE,Categoria.OUTROS));
+				
+				em.persist(startup);
 			}
 			
 
