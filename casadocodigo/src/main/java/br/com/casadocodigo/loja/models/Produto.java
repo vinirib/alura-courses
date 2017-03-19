@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class Produto {
 	private String imageFile;
 	
 	@ElementCollection
-	private List<Preco> precos;
+	private List<Preco> precos = new ArrayList<>();
 
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataLancamento;

@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.daos;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import br.com.casadocodigo.loja.infra.FileLoader;
 import br.com.casadocodigo.loja.models.Categoria;
 import br.com.casadocodigo.loja.models.Produto;
+import br.com.casadocodigo.loja.models.TipoPreco;
 
 @Repository
 @Transactional
@@ -56,9 +58,9 @@ public class ProdutoDAO {
 		manager.remove(produto);
 	}
 	
-	public void atualizar(Produto produtoUpdated){
-		manager.merge(produtoUpdated);
-	}
+//	public void atualizar(Produto produtoUpdated){
+//		manager.merge(produtoUpdated);
+//	}
 
 	public List<Produto> listarPorCategoria(String categoria) {
 		List<Produto> produtos = manager.createQuery("select p from Produto p join fetch p.categorias categorias where categorias = :categoria", Produto.class)
@@ -66,11 +68,19 @@ public class ProdutoDAO {
 		setBase64Images(produtos);
 		return produtos;
 	}
+	
+	public BigDecimal somaPrecosPorTipo(TipoPreco tipoPreco){
+		return manager.createQuery("select sum(preco.valor) from Produto p inner join p.precos preco where preco.preco = :tipoPreco", BigDecimal.class)
+				.setParameter("tipoPreco", tipoPreco)
+				.getSingleResult();
+	}
 
 	private void setBase64Images(List<Produto> produtos) {
-		for (Produto produto2 : produtos) {
-			String image = fileLoader.load(produto2.getSumarioPath());
-			produto2.setImageFile(image);
+		if (!produtos.isEmpty()) {
+			for (Produto produto2 : produtos) {
+				String image = fileLoader.load(produto2.getSumarioPath());
+				produto2.setImageFile(image);
+			}
 		}
 	}
 }

@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -20,6 +21,23 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class JPAConfiguration {
 	
 	@Bean
+	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource) {
+		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		
+		entityManagerFactory.setPackagesToScan("br.com.casadocodigo.loja.models");
+		entityManagerFactory.setDataSource(dataSource);
+		
+		entityManagerFactory
+		.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		
+		Properties props = aditionalProperties();
+		
+		entityManagerFactory.setJpaProperties(props);
+		return entityManagerFactory;
+	}
+	
+	@Bean
+	@Profile("dev")
 	public DataSource getDataSource(){
 		
 	    ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -40,17 +58,9 @@ public class JPAConfiguration {
 	    return dataSource;
 		
 	}
-
+	
 	@Bean
-	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource) {
-		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-
-		entityManagerFactory.setPackagesToScan("br.com.casadocodigo.loja.models");
-		entityManagerFactory.setDataSource(dataSource);
-
-		entityManagerFactory
-				.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-
+	public Properties aditionalProperties() {
 		Properties props = new Properties();
 
         props.setProperty("hibernate.dialect" , "org.hibernate.dialect.MySQL5Dialect");
@@ -67,10 +77,10 @@ public class JPAConfiguration {
 		/** Hibernate Statistics **/
 		props.setProperty("hibernate.generate_statistics", "true");
 		
-		entityManagerFactory.setJpaProperties(props);
-		return entityManagerFactory;
+
+		return props;
 	}
-	
+
 	@Bean
 	public JpaTransactionManager getTransactionManager(EntityManagerFactory emf) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
