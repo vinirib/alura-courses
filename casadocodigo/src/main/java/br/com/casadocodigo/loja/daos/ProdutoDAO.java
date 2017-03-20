@@ -58,9 +58,6 @@ public class ProdutoDAO {
 		manager.remove(produto);
 	}
 	
-//	public void atualizar(Produto produtoUpdated){
-//		manager.merge(produtoUpdated);
-//	}
 
 	public List<Produto> listarPorCategoria(String categoria) {
 		List<Produto> produtos = manager.createQuery("select p from Produto p join fetch p.categorias categorias where categorias = :categoria", Produto.class)

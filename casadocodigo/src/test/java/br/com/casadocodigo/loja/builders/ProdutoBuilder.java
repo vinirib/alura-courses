@@ -2,9 +2,10 @@ package br.com.casadocodigo.loja.builders;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 import br.com.casadocodigo.loja.models.Categoria;
 import br.com.casadocodigo.loja.models.Preco;
@@ -40,7 +41,7 @@ public class ProdutoBuilder {
         preco.setPreco(tipoPreco);
         preco.setValor(valor);
         livro.getPrecos().add(preco);
-        livro.setCategorias(Arrays.asList(Categoria.values()));
+        livro.setCategorias(Lists.newArrayList(Categoria.values()));
         return livro;
     }
 

@@ -24,7 +24,7 @@ import br.com.casadocodigo.loja.models.TipoPreco;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ JPAConfiguration.class, ProdutoDAO.class, FileLoader.class, DataSourceConfigurationTest.class }) 
 @ActiveProfiles("test")
-@Transactional
+@Transactional(Transactional.TxType.REQUIRES_NEW)
 public class ProdutoDAOTest {
 
 
@@ -86,16 +86,16 @@ public class ProdutoDAOTest {
 		}
     }
     
-//    @Test
-//    public void atualizarProduto(){
-//    	Produto produto = ProdutoBuilder.newProduto(TipoPreco.EBOOK, BigDecimal.TEN).buildOne();
-//    	String tituloAnterior = produto.getTitulo();
-//    	produtoDao.gravar(produto);
-//    	Produto produtoEncontrado = produtoDao.find(produto.getId());
-//    	produtoEncontrado.setTitulo("Produto Editado");
-//    	produtoDao.gravar(produtoEncontrado);
-//    	Assert.assertNotEquals(tituloAnterior, produtoEncontrado.getTitulo());
-//    }
+    @Test
+    public void atualizarProduto(){
+    	Produto produto = ProdutoBuilder.newProduto(TipoPreco.EBOOK, BigDecimal.TEN).buildOne();
+    	String tituloAnterior = produto.getTitulo();
+    	produtoDao.gravar(produto);
+    	Produto produtoEncontrado = produtoDao.find(produto.getId());
+    	produtoEncontrado.setTitulo("Produto Editado");
+    	produtoDao.gravar(produtoEncontrado);
+    	Assert.assertNotEquals(tituloAnterior, produtoEncontrado.getTitulo());
+    }
     
     @Test
     public void listarProdutoPorCategoria(){
