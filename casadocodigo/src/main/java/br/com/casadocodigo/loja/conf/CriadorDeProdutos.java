@@ -47,6 +47,7 @@ public class CriadorDeProdutos {
 	@PostConstruct
 	public void init() {
 		TransactionTemplate template = new TransactionTemplate(transactionManager);
+		template.setTransactionManager(transactionManager);
 		template.execute(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
@@ -62,7 +63,6 @@ public class CriadorDeProdutos {
 					criaProdutos();
 				}
 			}
-
 			private void verifyUsers() {
 				try {
 					usuarioDAO.loadUserByUsername("admin@casadocodigo.com.br");
@@ -84,22 +84,23 @@ public class CriadorDeProdutos {
 			}
 
 			private void verifyRoles() {
-				List<Role> adminRole = roleDAO.findByName("ROLE_ADMIN");
-				
-				if (adminRole.isEmpty()) {
+				try {
+					roleDAO.findByName("ROLE_ADMIN");
+				} catch (Exception e) {
 					Role roleAdmin = new Role();
 					roleAdmin.setNome("ROLE_ADMIN");
-					
 					em.persist(roleAdmin);
 				}
 				
-				List<Role> clientRole = roleDAO.findByName("ROLE_CLIENT");
-				
-				if (clientRole.isEmpty()) {
+				try {
+					roleDAO.findByName("ROLE_CLIENT");
+				} catch (Exception e) {
 					Role roleClient = new Role();
 					roleClient.setNome("ROLE_CLIENT");
-					em.persist(clientRole);
+					em.persist(roleClient);
 				}
+				
+				
 			}
 			
 			private void criaProdutos() {

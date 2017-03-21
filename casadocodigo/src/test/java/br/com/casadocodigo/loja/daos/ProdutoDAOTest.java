@@ -24,7 +24,7 @@ import br.com.casadocodigo.loja.models.TipoPreco;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ JPAConfiguration.class, ProdutoDAO.class, FileLoader.class, DataSourceConfigurationTest.class }) 
 @ActiveProfiles("test")
-@Transactional(Transactional.TxType.REQUIRES_NEW)
+@Transactional
 public class ProdutoDAOTest {
 
 

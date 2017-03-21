@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.casadocodigo.loja.daos.LoginDao;
+import br.com.casadocodigo.loja.daos.UsuarioDAO;
 import br.com.casadocodigo.loja.models.Usuario;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	private LoginDao loginDao;
+	private UsuarioDAO usuarioDAO;
 	
     @RequestMapping(value="/login", method=RequestMethod.GET)
     public String login(){
@@ -33,7 +33,7 @@ public class LoginController {
     
     @RequestMapping(value="/login/gravar",method=RequestMethod.POST)
     public String gravar(Usuario usuario, RedirectAttributes redirectAttributes){
-    	loginDao.save(usuario);
+    	usuarioDAO.save(usuario);
     	redirectAttributes.addFlashAttribute("sucesso", "Usuario cadastrado com sucesso!");
     	return "redirect:/login";
     }

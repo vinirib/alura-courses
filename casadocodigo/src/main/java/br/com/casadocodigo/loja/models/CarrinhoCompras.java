@@ -17,7 +17,7 @@ public class CarrinhoCompras  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Map<CarrinhoItem, Integer> itens = new LinkedHashMap<CarrinhoItem, Integer>();
+	private transient Map<CarrinhoItem, Integer> itens = new LinkedHashMap<CarrinhoItem, Integer>();
 	
 	public void add(CarrinhoItem item){
 		itens.put(item, getQuantidade(item) + 1);

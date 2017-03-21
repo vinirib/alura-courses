@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import br.com.casadocodigo.loja.models.Usuario;
@@ -29,6 +30,17 @@ public class UsuarioDAO implements UserDetailsService {
 		}
 
 		return usuarios.get(0);
+	}
+	
+	public void save(Usuario usuario) {
+		encryptPassword(usuario);
+		manager.persist(usuario);
+	}
+
+	private void encryptPassword(Usuario usuario) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String cryptedPassword = encoder.encode(usuario.getSenha());
+		usuario.setSenha(cryptedPassword);
 	}
 
 }
