@@ -47,6 +47,7 @@
 					        <tr>
 					            <th>Título</th>
 					            <th>Descrição</th>
+					            <th>Preços</th>
 					            <th>Páginas</th>
 					            <th>Editar</th>
 				                <th>Remover</th>
@@ -57,6 +58,7 @@
 					            <tr>
 					                <td><a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build()}">${produto.titulo}</a></td>
 					                <td>${produto.descricao}</td>
+					                <td>${produto.precos }</td>
 					                <td>${produto.paginas}</td>
 				                    <td>
 				                  		<form:form method="post" servletRelativeAction="/produtos/editar">

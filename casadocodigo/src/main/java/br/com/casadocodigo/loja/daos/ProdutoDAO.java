@@ -33,7 +33,8 @@ public class ProdutoDAO {
 	}
 	
 	public List<Produto> listar(){
-		List<Produto> produtos = manager.createQuery("select q from Produto q", Produto.class).getResultList();
+		List<Produto> produtos = manager.createQuery("select p from Produto p inner join fetch p.categorias", Produto.class).getResultList();
+//		List<Produto> produtos = manager.createNativeQuery("SELECT * FROM .Produto p INNER JOIN produto_categoria c on  p.id = categoria_id INNER JOIN Produto_precos o on p.id = o.Produto_id;", Produto.class).getResultList();
 		setBase64Images(produtos);
 		return produtos;
 	}

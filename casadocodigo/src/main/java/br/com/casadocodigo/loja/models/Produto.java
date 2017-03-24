@@ -11,7 +11,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +44,7 @@ public class Produto {
 	private Calendar dataLancamento;
 	private String sumarioPath;
 
-	@ElementCollection(targetClass=Categoria.class, fetch=FetchType.EAGER)
+	@ElementCollection(targetClass=Categoria.class)
 	@CollectionTable(name="produto_categoria", joinColumns = @JoinColumn(name = "categoria_id"))
 	@Column(name="categoria", nullable=false)
 	@Enumerated(EnumType.STRING)

@@ -69,7 +69,7 @@
 					<tfoot>
 					    <tr>
 					        <td colspan="3">
-							<form:form servletRelativeAction="/produtos/finalizar" method="post">
+							<form:form servletRelativeAction="/pagamento/finalizar" method="post">
 					            <input type="submit" class="checkout" name="checkout" value="Finalizar compra" />
 	    					  </form:form>
 					        </td>

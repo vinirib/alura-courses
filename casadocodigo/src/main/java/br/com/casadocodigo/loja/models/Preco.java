@@ -25,5 +25,8 @@ public class Preco {
 		this.preco = preco;
 	}
 	
+	public String toString() {
+	    return this.preco.name() + " - " + this.valor;
+	}
 	
 }
