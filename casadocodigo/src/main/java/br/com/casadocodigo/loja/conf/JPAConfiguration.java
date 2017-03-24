@@ -21,7 +21,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class JPAConfiguration {
 	
 	@Bean
-	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource, Properties additionalProperties) {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 		
 		entityManagerFactory.setPackagesToScan("br.com.casadocodigo.loja.models");
@@ -30,9 +30,9 @@ public class JPAConfiguration {
 		entityManagerFactory
 		.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		
-		Properties props = aditionalProperties();
-		
-		entityManagerFactory.setJpaProperties(props);
+//		Properties props = aditionalProperties();
+//		entityManagerFactory.setJpaProperties(props);
+		entityManagerFactory.setJpaProperties(additionalProperties);
 		return entityManagerFactory;
 	}
 	
@@ -60,13 +60,12 @@ public class JPAConfiguration {
 	}
 	
 	@Bean
-	public Properties aditionalProperties() {
-		Properties props = new Properties();
-
-        props.setProperty("hibernate.dialect" , "org.hibernate.dialect.MySQL5Dialect");
-        props.setProperty("hibernate.show_sql", "true");
-        props.setProperty("hibernate.hbm2ddl.auto", "update");
-
+	@Profile("dev")
+	public Properties additionalProperties() {
+	    Properties props = new Properties();
+	    props.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
+	    props.setProperty("hibernate.show_sql", "true");
+	    props.setProperty("hibernate.hbm2ddl.auto", "update");
 		/**
 		 * Second level cache 
 		 */
@@ -78,7 +77,7 @@ public class JPAConfiguration {
 		props.setProperty("hibernate.generate_statistics", "true");
 		
 
-		return props;
+	    return props;
 	}
 
 	@Bean

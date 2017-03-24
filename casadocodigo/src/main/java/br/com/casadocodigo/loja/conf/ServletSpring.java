@@ -15,7 +15,8 @@ public class ServletSpring extends AbstractAnnotationConfigDispatcherServletInit
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[]{SecurityConfiguration.class, AppWebConfiguration.class, JPAConfiguration.class};
+		return new Class[]{SecurityConfiguration.class, 
+				AppWebConfiguration.class, JPAConfiguration.class, JPAProductionConfiguration.class};
 	}
 
 	@Override
@@ -42,12 +43,14 @@ public class ServletSpring extends AbstractAnnotationConfigDispatcherServletInit
 
 	/**
 	 *  Activate Database profile "dev" onStartup Application
+	 *  
+	 *  commented because heroku profile prod
 	 */
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-	    super.onStartup(servletContext);
-	    servletContext.addListener(new RequestContextListener());
-	    servletContext.setInitParameter("spring.profiles.active", "dev");
-	}
+//	@Override
+//	public void onStartup(ServletContext servletContext) throws ServletException {
+//	    super.onStartup(servletContext);
+//	    servletContext.addListener(new RequestContextListener());
+//	    servletContext.setInitParameter("spring.profiles.active", "dev");
+//	}
 
 }
