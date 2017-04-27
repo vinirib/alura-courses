@@ -12,6 +12,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 import br.com.alura.loja.Servidor;
@@ -40,7 +41,7 @@ public class ProjetoTest {
 	@Test
 	public void testaXmlCliente(){
 		String projetoString = target.path("/projetos/1").request().get(String.class);
-		Projeto projeto = (Projeto) new XStream().fromXML(projetoString);
+		Projeto projeto = new Gson().fromJson(projetoString, Projeto.class);
 		Assert.assertEquals("Minha loja", projeto.getNome());
 	}
 	
