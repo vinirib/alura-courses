@@ -1,5 +1,7 @@
 package br.com.alura.test;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -13,13 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.gson.Gson;
-import com.thoughtworks.xstream.XStream;
 
 import br.com.alura.loja.Servidor;
-import br.com.alura.loja.modelo.Carrinho;
-import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.modelo.Projeto;
-import junit.framework.Assert;
 
 public class ProjetoTest {
 
@@ -42,22 +40,23 @@ public class ProjetoTest {
 	public void testaXmlCliente(){
 		String projetoString = target.path("/projetos/1").request().get(String.class);
 		Projeto projeto = new Gson().fromJson(projetoString, Projeto.class);
-		Assert.assertEquals("Minha loja", projeto.getNome());
+		assertEquals("Minha loja", projeto.getNome());
 	}
 	
 	@Test
-	public void TestaAdiciona(){
-		String carrinhoXml = constroiCarrinho();
-		Entity<String> entity = Entity.entity(carrinhoXml, MediaType.APPLICATION_XML);
-        Response response = target.path("/carrinhos").request().post(entity);
-        Assert.assertEquals("<status>sucesso</status>", response.readEntity(String.class));
+	public void testaAdiciona(){
+		Projeto projeto = constroiProduto();
+		Entity<String> projetoXml = Entity.entity(projeto.toXML(), MediaType.APPLICATION_XML);
+		Response response = target.path("/projetos").request().post(projetoXml);
+		String projetoInserido = target.path(response.getHeaderString("Location").replaceFirst("http://localhost:8080", ""))
+				.request().get(String.class);
+		Projeto projetoRetornado = new Gson().fromJson(projetoInserido, Projeto.class);
+		assertEquals(201, response.getStatus());
+		assertEquals(projetoRetornado.getNome(), projeto.getNome());
 	}
 
-	private String constroiCarrinho() {
-		Carrinho carrinho = new Carrinho();
-        carrinho.adiciona(new Produto(314L, "Tablet", 999, 1));
-        carrinho.setRua("Rua Vergueiro");
-        carrinho.setCidade("Sao Paulo");
-        return carrinho.toXML();
+	private Projeto constroiProduto() {
+		return new Projeto(2l, "Projeto de Java", 2017);
 	}
+	
 }
